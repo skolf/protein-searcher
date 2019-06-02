@@ -1,0 +1,5 @@
+#!/bin/sh
+echo Building protein-searcher
+
+# Build the app
+docker build -t protein-searcher .
