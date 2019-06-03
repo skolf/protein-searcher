@@ -15,8 +15,12 @@ COPY . /usr/src/app
 WORKDIR /usr/src/app
 
 # Install compiler
-RUN apt-get update
-RUN apt-get install -y --no-install-recommends gcc
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends gcc
 
-# Install BioPython
-RUN pip install biopython==1.73
+# Install Python packages
+RUN pip install pylint==2.3.1 && \
+    pip install biopython==1.73
+
+# Linting
+RUN find . -iname "*.py" | xargs pylint
