@@ -19,7 +19,8 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends gcc
 
 # Install Python packages
-RUN pip install -r requirements.txt
+RUN pip install pip -U && \
+    pip install -r requirements.txt
 
 # Linting
 RUN find . -iname "*.py" | xargs pylint
