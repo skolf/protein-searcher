@@ -1,0 +1,2 @@
+biopython==1.73
+pylint==2.3.1

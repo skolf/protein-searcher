@@ -19,8 +19,7 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends gcc
 
 # Install Python packages
-RUN pip install pylint==2.3.1 && \
-    pip install biopython==1.73
+RUN pip install -r requirements.txt
 
 # Linting
 RUN find . -iname "*.py" | xargs pylint
