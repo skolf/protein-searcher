@@ -23,4 +23,4 @@ RUN pip install pip -U && \
     pip install -r requirements.txt
 
 # Linting
-RUN find . -iname "*.py" | xargs pylint
+#RUN find . -iname "*.py" | xargs pylint
