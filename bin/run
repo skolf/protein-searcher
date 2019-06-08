@@ -1,2 +1,3 @@
 #!/bin/sh
-docker run -it --rm --name protein-searcher protein-searcher
+docker-compose build
+docker-compose up

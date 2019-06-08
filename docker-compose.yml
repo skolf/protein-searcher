@@ -3,10 +3,13 @@ services:
   web:
     restart: always
     build: .
-    command: "python3 manage.py runserver 0.0.0.0:8000"
+    command: "bin/docker_init"
     volumes:
       - .:/usr/src/app
     ports:
       - "8000:8000"
+    depends_on:
+      - redis
   redis:
+    restart: always
     image: "redis:alpine"
