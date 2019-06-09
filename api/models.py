@@ -15,3 +15,12 @@ class Search(models.Model):
     processed = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+class Result(models.Model):
+
+    id = models.AutoField(primary_key=True)
+    search = models.OneToOneField(Search, on_delete=models.CASCADE)
+    protein = models.ForeignKey(Protein, on_delete=models.PROTECT)
+    location = models.IntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
