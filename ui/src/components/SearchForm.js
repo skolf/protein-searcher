@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
 import axios from 'axios';
+import { toast } from 'react-toastify';
+import React, { Component } from 'react';
 
 export default class SearchForm extends Component {
 
@@ -21,7 +22,10 @@ export default class SearchForm extends Component {
       e.preventDefault();
       const data = {query: this.state.query};
       axios.post('http://localhost:8000/v1/searches/', data, {withCredentials: true})
-        .then(res => console.log(res.data));
+        .then((res) => {
+          console.log(res.data);
+          toast("Submitted a new search!", {type: toast.TYPE.SUCCESS});
+        });
 
       this.setState({
         query: ''
@@ -38,6 +42,7 @@ export default class SearchForm extends Component {
             onChange={this.onChangeQuery}
             placeholder="DNA sequence"
             aria-label="Search"
+            required
           />
           <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>

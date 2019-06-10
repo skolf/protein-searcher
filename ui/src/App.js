@@ -1,10 +1,17 @@
 import axios from 'axios';
+import { toast } from 'react-toastify';
 import React, { Component } from 'react';
 import SearchForm from './components/SearchForm';
 import ResultList from './components/ResultList';
 
 import './App.css';
+import '../node_modules/react-toastify/dist/ReactToastify.min.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+
+toast.configure({
+  autoClose: 3000,
+  draggable: false
+});
 
 class App extends Component {
   constructor(props) {
@@ -37,7 +44,7 @@ class App extends Component {
             <SearchForm></SearchForm>
             <form className="form-inline">
               <button
-                className="btn btn-outline-secondary my-2 my-sm-0"
+                className="btn btn-outline-secondary my-2 my-sm-0 ml-2"
                 type="button"
                 onClick={ this.listSearches }
               >
