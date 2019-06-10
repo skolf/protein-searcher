@@ -1,18 +1,20 @@
 from django_rq import job
-from random import shuffle
-from Bio import SeqIO
-from api.models import Protein, Search
+from api.models import Result, Search
+# from api.searcher import Searcher
+from api.utils.searcher import Searcher
 
 @job
 def perform_search(search_id):
     search = Search.objects.get(pk=search_id)
-    dna_sequence = search.query
-    proteins = list(Protein.objects.all())
-    shuffle(proteins)
+    found_protein = Searcher().find_sequence(search.query)
 
-    for protein in proteins:
-        type = 'genbank' if protein.sequence_file_name.endswith('.gb') else 'fasta'
-        for seq_record in SeqIO.parse(f'./data/sequences/{protein.sequence_file_name}', type):
-            # print(repr(seq_record.seq))
-            location = seq_record.seq.find(dna_sequence)
-            # print(f'Location: {location}')
+    if found_protein is not None:
+        result = Result(
+            search=search,
+            protein=found_protein['protein'],
+            location=found_protein['location']
+        )
+        result.save()
+
+    search.processed = True
+    search.save()
