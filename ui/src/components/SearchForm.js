@@ -30,23 +30,17 @@ export default class SearchForm extends Component {
 
     render() {
       return (
-        <div style={{marginTop: 50}}>
-          <h3>Search Proteins</h3>
-          <form onSubmit={this.onSubmit}>
-            <div className="form-group">
-              <label>DNA sequence:</label>
-              <input
-                type="text"
-                className="form-control"
-                value={this.state.query}
-                onChange={this.onChangeQuery}
-              />
-            </div>
-            <div className="form-group">
-              <input type="submit" value="Go!" className="btn btn-primary"/>
-            </div>
-          </form>
-        </div>
+        <form className="form-inline my-2 my-lg-0" onSubmit={this.onSubmit}>
+          <input
+            type="search"
+            className="form-control mr-sm-2"
+            value={this.state.query}
+            onChange={this.onChangeQuery}
+            placeholder="DNA sequence"
+            aria-label="Search"
+          />
+          <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
       )
     }
 }
