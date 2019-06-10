@@ -10,6 +10,6 @@ class SearchViewSet(mixins.ListModelMixin,
     """
     Create, list, and read endpoints for searches
     """
-    queryset = Search.objects.all()
+    queryset = Search.objects.prefetch_related('result', 'result__protein').all()
     serializer_class = SearchSerializer
     # permission_classes = (permissions.IsAuthenticated,)

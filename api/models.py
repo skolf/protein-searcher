@@ -8,7 +8,7 @@ class Protein(models.Model):
     code = models.CharField(max_length=32)
     sequence_file_name = models.CharField(max_length=255)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.name
 
 class Search(models.Model):
