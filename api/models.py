@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.contrib.sessions.models import Session
 
 class Protein(models.Model):
 
@@ -14,6 +15,7 @@ class Protein(models.Model):
 class Search(models.Model):
 
     id = models.AutoField(primary_key=True)
+    session = models.ForeignKey(Session, on_delete=models.CASCADE)
     query = models.CharField(max_length=1024)
     processed = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
