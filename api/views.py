@@ -17,7 +17,8 @@ class SearchViewSet(mixins.ListModelMixin,
         """
         List a queryset
         """
-        queryset = Search.objects.filter(session_id = request.session.session_key).prefetch_related('result', 'result__protein').all()
+        queryset = Search.objects.filter(session_id = request.session.session_key) \
+                         .order_by('-created_at').prefetch_related('result', 'result__protein').all()
 
         page = self.paginate_queryset(queryset)
         if page is not None:
