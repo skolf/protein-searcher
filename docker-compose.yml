@@ -1,5 +1,14 @@
 version: '3'
 services:
+  ui:
+    container_name: ui
+    build: ./ui
+    ports:
+      - "80:80"
+    links:
+      - api
+    depends_on:
+      - api
   api:
     restart: always
     build: .
@@ -11,13 +20,6 @@ services:
       - "8000:8000"
     depends_on:
       - redis
-  ui:
-    container_name: ui
-    build: ./ui
-    ports:
-      - "80:80"
-    links:
-      - api
   rq:
     restart: always
     image: protein-searcher_api:latest
