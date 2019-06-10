@@ -38,7 +38,7 @@ class App extends Component {
   render() {
     return (
       <div className="container">
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
           <a className="navbar-brand" href="#">Protein Searcher</a>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <SearchForm></SearchForm>

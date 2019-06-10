@@ -25,6 +25,10 @@ export default class SearchForm extends Component {
         .then((res) => {
           console.log(res.data);
           toast("Submitted a new search!", {type: toast.TYPE.SUCCESS});
+        })
+        .catch((err) => {
+          console.log(err);
+          toast("An error occurred! Please try again.", {type: toast.TYPE.ERROR});
         });
 
       this.setState({

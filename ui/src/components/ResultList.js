@@ -14,9 +14,9 @@ export default class ResultList extends Component {
           <table className="table table-striped">
             <thead>
               <tr>
-                <td>DNA Sequence</td>
-                <td>Status</td>
-                <td>Result</td>
+                <th>DNA Sequence</th>
+                <th>Status</th>
+                <th>Result</th>
               </tr>
             </thead>
             <tbody>
