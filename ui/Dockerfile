@@ -2,8 +2,8 @@
 # Builds a docker image containing all dependencies for the full app
 ###############################################################################
 
-# Python 3.7
-FROM python:3.7-alpine
+# Node 8.16
+FROM node:8.16.0-alpine as builder
 
 # Author
 MAINTAINER John Skolfield <skolfie@gmail.com>
@@ -14,12 +14,14 @@ COPY . /usr/src/app
 # Set the working directory
 WORKDIR /usr/src/app
 
-# Python config
-ENV PYTHONUNBUFFERED 1
+# Install npm packages
+RUN npm install
 
-# Install dependencies
-RUN apk add --no-cache --virtual .build-deps bash python3-dev gcc musl-dev alpine-sdk
+# Build app
+RUN npm run build
 
-# Install Python packages
-RUN pip install pip -U && \
-    pip install -r requirements.txt
+# Build minimal nginx image
+FROM nginx:1.17.0-alpine
+WORKDIR /var/www/app
+COPY --from=builder /usr/src/app/build/ /var/www/app/
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf

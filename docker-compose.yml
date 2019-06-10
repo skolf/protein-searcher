@@ -1,9 +1,9 @@
 version: '3'
 services:
-  web:
+  api:
     restart: always
     build: .
-    image: protein-searcher_web:latest
+    image: protein-searcher_api:latest
     command: "bin/docker_init"
     volumes:
       - .:/usr/src/app
@@ -11,14 +11,21 @@ services:
       - "8000:8000"
     depends_on:
       - redis
+  ui:
+    container_name: ui
+    build: ./ui
+    ports:
+      - "80:80"
+    links:
+      - api
   rq:
     restart: always
-    image: protein-searcher_web:latest
+    image: protein-searcher_api:latest
     command: "bin/run_rq"
     volumes:
       - .:/usr/src/app
     depends_on:
-      - web
+      - api
   redis:
     restart: always
     image: "redis:alpine"
