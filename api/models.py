@@ -8,6 +8,9 @@ class Protein(models.Model):
     code = models.CharField(max_length=32)
     sequence_file_name = models.CharField(max_length=255)
 
+    def __str__(self):
+        return self.name
+
 class Search(models.Model):
 
     id = models.AutoField(primary_key=True)
@@ -20,7 +23,7 @@ class Result(models.Model):
 
     id = models.AutoField(primary_key=True)
     search = models.OneToOneField(Search, on_delete=models.CASCADE)
-    protein = models.ForeignKey(Protein, on_delete=models.PROTECT)
+    protein = models.ForeignKey(Protein, blank=True, null=True, on_delete=models.PROTECT)
     location = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
