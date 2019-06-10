@@ -10,6 +10,16 @@ services:
       - "8000:8000"
     depends_on:
       - redis
+    networks:
+      - redis-net
   redis:
     restart: always
     image: "redis:alpine"
+    ports:
+      - "6379:6379"
+    hostname: redis
+    networks:
+      - redis-net
+
+networks:
+  redis-net:

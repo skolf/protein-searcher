@@ -1,5 +1,7 @@
+import django_rq
 from rest_framework import serializers
 from api.models import Search
+from api.tasks import perform_search
 
 class SearchSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
@@ -12,4 +14,6 @@ class SearchSerializer(serializers.Serializer):
         """
         Create and return a new search instance, given the validated data.
         """
-        return Search.objects.create(**validated_data)
+        search = Search.objects.create(**validated_data)
+        django_rq.enqueue(perform_search, search.id)
+        return search

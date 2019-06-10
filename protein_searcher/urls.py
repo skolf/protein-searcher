@@ -22,6 +22,8 @@ Including another URLconf
 # ]
 
 from django.conf.urls import url, include
+from django.contrib import admin
+from django.urls import path
 from rest_framework.routers import DefaultRouter
 from api.views import SearchViewSet
 
@@ -29,5 +31,7 @@ api_router = DefaultRouter()
 api_router.register(r'searches', SearchViewSet, 'search')
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
+    url(r'^django-rq/', include('django_rq.urls')),
     url(r'^v1/', include(api_router.urls))
 ]

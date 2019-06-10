@@ -1,4 +1,5 @@
 Django==2.2
 djangorestframework==3.9
+django-rq==2.0
 biopython==1.73
 pylint==2.3
