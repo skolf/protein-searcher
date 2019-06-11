@@ -9,6 +9,7 @@ Docker Compose 1.23 or greater
 # Installation
 ## Clone the source
 `git clone git@github.com:skolf/protein-searcher.git`
+
 `cd protein-searcher`
 
 ## Install Docker and Docker Compose
@@ -24,3 +25,13 @@ After installing just run this command from the project root directory:
 This will build all dependencies and launch the full web application using docker-compose.
 
 Now point your browser to [localhost](http://localhost)
+
+# To do before production
+These tasks remain before this is ready for production:
+
+* Tests
+* Move to a real db - MySQL or PostgreSQL
+* Deploy api with WSGI
+* Move hostnames to config
+* Add validations
+* Add linting
